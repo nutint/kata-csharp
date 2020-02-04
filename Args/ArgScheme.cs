@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+
 namespace Args
 {
     public class ArgScheme
@@ -20,10 +22,12 @@ namespace Args
 
         private OptionScheme(string scheme): base(scheme) { }
 
-        public Boolean isArgExists(string stringParam)
+        public bool IsArgExists(string stringParam)
         {
-            stringParam.Contains("xx");
-            return stringParam.Contains(Scheme);
+            return stringParam
+                .Split(" ")
+                .Select(element => element.Trim()).ToList()
+                .Exists(x => x == $"-{Scheme}");
         }
     }
 }
