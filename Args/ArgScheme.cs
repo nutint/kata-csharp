@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Immutable;
 using System.Linq;
 
 namespace Args
@@ -28,6 +29,21 @@ namespace Args
                 .Split(" ")
                 .Select(element => element.Trim()).ToList()
                 .Exists(x => x == $"-{Scheme}");
+        }
+    }
+
+    public class StringScheme: ArgScheme
+    {
+        public static StringScheme Of(string schemeName)
+        {
+            return new StringScheme(schemeName);
+        }
+
+        private StringScheme(string scheme): base(scheme) { }
+
+        public IImmutableList<string> ExtractValue(string stringParam)
+        {
+            return ImmutableList.Create("stringValue");
         }
     }
 }
