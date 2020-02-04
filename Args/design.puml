@@ -1,0 +1,12 @@
+@startuml
+state EngineReady
+state ParsingAnArg
+
+
+[*] --> EngineReady
+EngineReady --> EngineReady : accept(" ")
+EngineReady --> ParsingAnArg : accept("-")
+ParsingAnArg --> EngineReady : finishParsing()
+
+
+@enduml
